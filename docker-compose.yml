@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: product_crud_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: product_crud
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - product_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: product_crud_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=product_crud
+      - DB_USERNAME=laravel
+      - DB_PASSWORD=secret123
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend:/var/www/html
+    networks:
+      - product_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: product_crud_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - product_network
+
+volumes:
+  mysql_data:
+
+networks:
+  product_network:
+    driver: bridge
