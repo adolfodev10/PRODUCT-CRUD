@@ -1,6 +1,9 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Save, X, Package, DollarSign, Layers, Archive, FileText, AlertCircle, Smartphone, Shirt, Book, Apple, Sparkles, Bike, Box } from 'lucide-react'
+import { 
+  Save, X, Package, DollarSign, Layers, Archive, FileText, AlertCircle, 
+  Smartphone, Shirt, Book, Apple, Sparkles, Bike, Box, CheckCircle 
+} from 'lucide-react'
 import api from '../services/api'
 
 interface ProductFormData {
@@ -18,6 +21,16 @@ interface ValidationErrors {
   categoria?: string[]
   descricao?: string[]
 }
+
+const categorias = [
+  { value: 'Eletrônicos', label: 'Eletrônicos', icon: Smartphone, color: 'text-blue-500' },
+  { value: 'Roupas', label: 'Roupas', icon: Shirt, color: 'text-pink-500' },
+  { value: 'Livros', label: 'Livros', icon: Book, color: 'text-amber-600' },
+  { value: 'Alimentos', label: 'Alimentos', icon: Apple, color: 'text-red-500' },
+  { value: 'Beleza', label: 'Beleza', icon: Sparkles, color: 'text-purple-500' },
+  { value: 'Esportes', label: 'Esportes', icon: Bike, color: 'text-green-600' },
+  { value: 'Outros', label: 'Outros', icon: Box, color: 'text-gray-500' }
+]
 
 export default function ProductForm() {
   const { id } = useParams<{ id: string }>()
@@ -164,14 +177,23 @@ export default function ProductForm() {
     }).format(num)
   }
 
+  const getSelectedCategoryIcon = () => {
+    const category = categorias.find(c => c.value === formData.categoria)
+    if (category && formData.categoria) {
+      const Icon = category.icon
+      return <Icon className="w-4 h-4" />
+    }
+    return null
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-6 sm:py-12 px-3 sm:px-4 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        {/* Success Toast - Responsivo */}
+        {/* Success Toast */}
         {successMessage && (
           <div className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 animate-slide-in-right">
             <div className="bg-green-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg flex items-center gap-2 text-sm sm:text-base">
-              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white text-green-500 flex items-center justify-center text-xs sm:text-sm">✓</div>
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{successMessage}</span>
             </div>
           </div>
@@ -179,7 +201,7 @@ export default function ProductForm() {
 
         {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          {/* Header - Responsivo */}
+          {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-5 sm:px-8 py-4 sm:py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 sm:space-x-3">
@@ -202,7 +224,7 @@ export default function ProductForm() {
             </div>
           </div>
 
-          {/* Form Body - Responsivo */}
+          {/* Form Body */}
           <form onSubmit={handleSubmit} className="p-5 sm:p-8 space-y-5 sm:space-y-6">
             {/* Nome do Produto */}
             <div>
@@ -316,7 +338,7 @@ export default function ProductForm() {
               </div>
             </div>
 
-            {/* Categoria */}
+            {/* Categoria - Sem emojis, apenas ícones */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                 <span className="flex items-center gap-2">
@@ -331,23 +353,26 @@ export default function ProductForm() {
                 className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all bg-white text-sm sm:text-base"
               >
                 <option value="">Selecione uma categoria</option>
-                <option value="Eletrônicos">
-                  <p>
-
-                  <Smartphone className='bg-red-500' />
-                   Eletrônicos
-                  </p>
-                   </option>
-                <option value="Roupas">👕 Roupas</option>
-                <option value="Livros">📚 Livros</option>
-                <option value="Alimentos">🍔 Alimentos</option>
-                <option value="Beleza">💄 Beleza</option>
-                <option value="Esportes">⚽ Esportes</option>
-                <option value="Outros">📦 Outros</option>
+                {categorias.map((cat) => (
+                  <option key={cat.value} value={cat.value}>
+                    {cat.label}
+                  </option>
+                ))}
               </select>
+
+              {/* Preview da categoria selecionada com ícone */}
+              {formData.categoria && (
+                <div className="mt-2 flex items-center gap-2 text-sm text-gray-600">
+                  <span className="text-xs">Categoria selecionada:</span>
+                  <div className="flex items-center gap-1.5 px-2 py-1 bg-gray-100 rounded-full">
+                    {getSelectedCategoryIcon()}
+                    <span>{formData.categoria}</span>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Form Actions - Responsivo */}
+            {/* Form Actions */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200">
               <button
                 type="submit"
