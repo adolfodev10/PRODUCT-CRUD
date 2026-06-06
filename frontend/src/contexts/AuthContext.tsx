@@ -1,6 +1,13 @@
 import { createContext, useState, useContext, useEffect } from 'react'
 import api from '../services/api'
 
+type User = {
+  id: number | null
+  name?: string
+  email?: string
+  is_admin?: boolean
+}
+
 const AuthContext = createContext<any>(null)
 
 export function useAuth() {
@@ -8,7 +15,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: any) {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -25,11 +32,10 @@ export function AuthProvider({ children }: any) {
     try {
       const response = await api.get('/me')
       setUser({
-        id: response.data.id as number,
-        name: response.data.name,
-        email: response.data.email,
-        is_admin: response.data.is_admin
-
+        id: response.data?.id || null,
+        name: response.data?.name || undefined,
+        email: response.data?.email || undefined,
+        is_admin: response.data?.is_admin || undefined
       })
     } catch (error) {
       console.error('Erro ao buscar usuario:', error)
