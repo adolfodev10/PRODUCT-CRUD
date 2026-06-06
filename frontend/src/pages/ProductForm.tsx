@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Save, X, Package, DollarSign, Layers, Archive, FileText, AlertCircle } from 'lucide-react'
+import { Save, X, Package, DollarSign, Layers, Archive, FileText, AlertCircle, Smartphone, Shirt, Book, Apple, Sparkles, Bike, Box } from 'lucide-react'
 import api from '../services/api'
 
 interface ProductFormData {
@@ -72,7 +72,6 @@ export default function ProductForm() {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
     
-    // Clear field error when user starts typing
     if (errors[name as keyof ValidationErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }))
     }
@@ -166,13 +165,13 @@ export default function ProductForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-6 sm:py-12 px-3 sm:px-4 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        {/* Success Toast */}
+        {/* Success Toast - Responsivo */}
         {successMessage && (
-          <div className="fixed top-4 right-4 z-50 animate-slide-in-right">
-            <div className="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-white text-green-500 flex items-center justify-center">✓</div>
+          <div className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 animate-slide-in-right">
+            <div className="bg-green-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg flex items-center gap-2 text-sm sm:text-base">
+              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white text-green-500 flex items-center justify-center text-xs sm:text-sm">✓</div>
               <span>{successMessage}</span>
             </div>
           </div>
@@ -180,36 +179,36 @@ export default function ProductForm() {
 
         {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
+          {/* Header - Responsivo */}
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-5 sm:px-8 py-4 sm:py-6">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <Package className="w-8 h-8 text-white" />
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <Package className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 <div>
-                  <h1 className="text-2xl font-bold text-white">
+                  <h1 className="text-xl sm:text-2xl font-bold text-white">
                     {id ? 'Editar Produto' : 'Novo Produto'}
                   </h1>
-                  <p className="text-blue-100 text-sm mt-1">
+                  <p className="text-blue-100 text-xs sm:text-sm mt-0.5 sm:mt-1">
                     {id ? 'Atualize as informações do produto' : 'Preencha os dados para cadastrar um novo produto'}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => navigate('/dashboard')}
-                className="text-white hover:bg-white/10 rounded-lg p-2 transition-colors"
+                className="text-white hover:bg-white/10 rounded-lg p-1.5 sm:p-2 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>
 
-          {/* Form Body */}
-          <form onSubmit={handleSubmit} className="p-8 space-y-6">
+          {/* Form Body - Responsivo */}
+          <form onSubmit={handleSubmit} className="p-5 sm:p-8 space-y-5 sm:space-y-6">
             {/* Nome do Produto */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                 <span className="flex items-center gap-2">
-                  <Package className="w-4 h-4 text-blue-600" />
+                  <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
                   Nome do Produto
                 </span>
               </label>
@@ -219,15 +218,15 @@ export default function ProductForm() {
                 value={formData.nome}
                 onChange={handleChange}
                 placeholder="Ex: Smartphone XYZ, Notebook Gamer, etc."
-                className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${
                   errors.nome 
                     ? 'border-red-500 focus:ring-red-500' 
                     : 'border-gray-200 focus:border-blue-500'
                 }`}
               />
               {errors.nome && (
-                <div className="mt-2 flex items-center gap-1 text-red-600 text-sm">
-                  <AlertCircle className="w-4 h-4" />
+                <div className="mt-1.5 sm:mt-2 flex items-center gap-1 text-red-600 text-xs sm:text-sm">
+                  <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span>{errors.nome[0]}</span>
                 </div>
               )}
@@ -235,9 +234,9 @@ export default function ProductForm() {
 
             {/* Descrição */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                 <span className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-blue-600" />
+                  <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
                   Descrição
                 </span>
               </label>
@@ -245,23 +244,23 @@ export default function ProductForm() {
                 name="descricao"
                 value={formData.descricao}
                 onChange={handleChange}
-                rows={4}
+                rows={3}
                 placeholder="Descreva as características do produto..."
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm sm:text-base"
               />
             </div>
 
             {/* Preço e Estoque */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                   <span className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-blue-600" />
+                    <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
                     Preço
                   </span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">R$</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">R$</span>
                   <input
                     type="number"
                     step="0.01"
@@ -269,7 +268,7 @@ export default function ProductForm() {
                     value={formData.preco}
                     onChange={handleChange}
                     placeholder="0,00"
-                    className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${
                       errors.preco 
                         ? 'border-red-500 focus:ring-red-500' 
                         : 'border-gray-200 focus:border-blue-500'
@@ -282,17 +281,17 @@ export default function ProductForm() {
                   </p>
                 )}
                 {errors.preco && (
-                  <div className="mt-2 flex items-center gap-1 text-red-600 text-sm">
-                    <AlertCircle className="w-4 h-4" />
+                  <div className="mt-1.5 sm:mt-2 flex items-center gap-1 text-red-600 text-xs sm:text-sm">
+                    <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span>{errors.preco[0]}</span>
                   </div>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                   <span className="flex items-center gap-2">
-                    <Archive className="w-4 h-4 text-blue-600" />
+                    <Archive className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
                     Estoque
                   </span>
                 </label>
@@ -302,15 +301,15 @@ export default function ProductForm() {
                   value={formData.estoque}
                   onChange={handleChange}
                   placeholder="Quantidade em estoque"
-                  className={`w-full px-4 py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${
                     errors.estoque 
                       ? 'border-red-500 focus:ring-red-500' 
                       : 'border-gray-200 focus:border-blue-500'
                   }`}
                 />
                 {errors.estoque && (
-                  <div className="mt-2 flex items-center gap-1 text-red-600 text-sm">
-                    <AlertCircle className="w-4 h-4" />
+                  <div className="mt-1.5 sm:mt-2 flex items-center gap-1 text-red-600 text-xs sm:text-sm">
+                    <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span>{errors.estoque[0]}</span>
                   </div>
                 )}
@@ -319,9 +318,9 @@ export default function ProductForm() {
 
             {/* Categoria */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                 <span className="flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-blue-600" />
+                  <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
                   Categoria
                 </span>
               </label>
@@ -329,35 +328,41 @@ export default function ProductForm() {
                 name="categoria"
                 value={formData.categoria}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all bg-white"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all bg-white text-sm sm:text-base"
               >
                 <option value="">Selecione uma categoria</option>
-                <option value="Eletrônicos"> Eletrônicos</option>
-                <option value="Roupas">Roupas</option>
-                <option value="Livros">Livros</option>
-                <option value="Alimentos"> Alimentos</option>
-                <option value="Beleza"> Beleza</option>
-                <option value="Esportes"> Esportes</option>
-                <option value="Outros"> Outros</option>
+                <option value="Eletrônicos">
+                  <p>
+
+                  <Smartphone className='bg-red-500' />
+                   Eletrônicos
+                  </p>
+                   </option>
+                <option value="Roupas">👕 Roupas</option>
+                <option value="Livros">📚 Livros</option>
+                <option value="Alimentos">🍔 Alimentos</option>
+                <option value="Beleza">💄 Beleza</option>
+                <option value="Esportes">⚽ Esportes</option>
+                <option value="Outros">📦 Outros</option>
               </select>
             </div>
 
-            {/* Form Actions */}
-            <div className="flex gap-4 pt-6 border-t border-gray-200">
+            {/* Form Actions - Responsivo */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200">
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02]"
+                className="w-full sm:flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-[0.98]"
               >
-                <span className="flex items-center justify-center gap-2">
+                <span className="flex items-center justify-center gap-2 text-sm sm:text-base">
                   {loading ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       {id ? 'Atualizando...' : 'Salvando...'}
                     </>
                   ) : (
                     <>
-                      <Save className="w-5 h-5" />
+                      <Save className="w-4 h-4 sm:w-5 sm:h-5" />
                       {id ? 'Atualizar Produto' : 'Cadastrar Produto'}
                     </>
                   )}
@@ -366,7 +371,7 @@ export default function ProductForm() {
               <button
                 type="button"
                 onClick={() => navigate('/dashboard')}
-                className="flex-1 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all"
+                className="w-full sm:flex-1 bg-gray-100 text-gray-700 py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg font-semibold hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all text-sm sm:text-base"
               >
                 Cancelar
               </button>
