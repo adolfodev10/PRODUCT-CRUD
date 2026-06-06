@@ -1,13 +1,13 @@
-import React, { createContext, useState, useContext, useEffect } from 'react'
+import { createContext, useState, useContext, useEffect } from 'react'
 import api from '../services/api'
 
-const AuthContext = createContext()
+const AuthContext = createContext<any>(null)
 
 export function useAuth() {
   return useContext(AuthContext)
 }
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: any) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -24,31 +24,38 @@ export function AuthProvider({ children }) {
   const fetchUser = async () => {
     try {
       const response = await api.get('/me')
-      setUser(response.data)
+      setUser({
+        id: response.data.id as number,
+        name: response.data.name,
+        email: response.data.email,
+        is_admin: response.data.is_admin
+
+      })
     } catch (error) {
       console.error('Erro ao buscar usuario:', error)
       localStorage.removeItem('token')
       delete api.defaults.headers.common['Authorization']
+      setUser(null)
     } finally {
       setLoading(false)
     }
   }
 
-  const login = async (email, password) => {
+  const login = async (email: string, password: string) => {
     const response = await api.post('/login', { email, password })
-    const { token, cliente } = response.data
+    const { token } = response.data
     localStorage.setItem('token', token)
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    setUser(cliente)
+    await fetchUser()
     return response.data
   }
 
-  const register = async (nome, email, password) => {
-    const response = await api.post('/register', { nome, email, password, password_confirmation: password })
-    const { token, cliente } = response.data
+  const register = async (name: string, email: string, password: string) => {
+    const response = await api.post('/register', { name, email, password, password_confirmation: password })
+    const { token, user } = response.data
     localStorage.setItem('token', token)
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    setUser(cliente)
+    setUser(user)
     return response.data
   }
 
