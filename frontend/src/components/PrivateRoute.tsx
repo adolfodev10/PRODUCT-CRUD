@@ -1,7 +1,12 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
-export default function PrivateRoute({ children, requiredAdmin = false }: any) {
+interface PrivateRouteProps {
+  children: React.ReactNode
+  requiredAdmin?: boolean
+}
+
+export default function PrivateRoute({ children, requiredAdmin = false }: PrivateRouteProps) {
   const { user, loading } = useAuth()
   
   if (loading) {
@@ -16,5 +21,5 @@ export default function PrivateRoute({ children, requiredAdmin = false }: any) {
     return <Navigate to="/dashboard" />
   }
 
-  return children
+  return <>{children}</>
 }

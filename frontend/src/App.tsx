@@ -5,21 +5,28 @@ import Dashboard from './pages/Dashboard'
 import ProductForm from './pages/ProductForm'
 import { AuthProvider } from './contexts/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
-import AdminDashboard from './pages/Dashboard'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router future={{  v7_startTransition: true,
+          v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/admin" element={<PrivateRoute requiredAdmin={true}>
+          <Route path="/admin" element={
+            <PrivateRoute requiredAdmin={true}>
             <AdminDashboard />
             </PrivateRoute>
           } 
           />
-          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/dashboard" element={
+            <PrivateRoute>
+              <Dashboard />
+              </PrivateRoute>
+            }
+             />
           <Route path="/produtos/novo" element={<PrivateRoute><ProductForm /></PrivateRoute>} />
           <Route path="/produtos/editar/:id" element={<PrivateRoute><ProductForm /></PrivateRoute>} />
         </Routes>

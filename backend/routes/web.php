@@ -1,32 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\ProdutoController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+});Route::get('/teste', fn() => 'Funciona');
 
-// Rotas da API
-Route::post('/api/login', [AuthController::class, 'login']);
-Route::post('/api/register', [AuthController::class, 'register']);
+// Rotas da API (temporário em web.php)
+Route::post('/api/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::post('/api/register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/api/me', [AuthController::class, 'me']);
-    Route::post('/api/logout', [AuthController::class, 'logout']);
+    Route::get('/api/me', [App\Http\Controllers\Api\AuthController::class, 'me']);
+    Route::post('/api/logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
+    Route::get('/api/produtos', [App\Http\Controllers\Api\ProdutoController::class, 'index']);
+    Route::post('/api/produtos', [App\Http\Controllers\Api\ProdutoController::class, 'store']);
+    Route::get('/api/produtos/{id}', [App\Http\Controllers\Api\ProdutoController::class, 'show']);
+    Route::put('/api/produtos/{id}', [App\Http\Controllers\Api\ProdutoController::class, 'update']);
+    Route::delete('/api/produtos/{id}', [App\Http\Controllers\Api\ProdutoController::class, 'destroy']);
     
-    // Rotas de produtos
-    Route::get('/api/produtos', [ProdutoController::class, 'index']);
-    Route::post('/api/produtos', [ProdutoController::class, 'store']);
-    Route::get('/api/produtos/{id}', [ProdutoController::class, 'show']);
-    Route::put('/api/produtos/{id}', [ProdutoController::class, 'update']);
-    Route::delete('/api/produtos/{id}', [ProdutoController::class, 'destroy']);
-
-
-    // Rotas exclusivas para admin
-    Route::middleware('admin')->group(function () {
-        Route::get('/api/admin/clientes/count', [AdminController::class, 'getClientesCount']);
-        Route::get('/api/admin/clientes', [AdminController::class, 'getAllClientes']);
-    });
-    });
+    // Rotas ADMIN
+    Route::get('/api/admin/clientes/count', [App\Http\Controllers\Api\AdminController::class, 'getClientesCount']);
+    Route::get('/api/admin/clientes', [App\Http\Controllers\Api\AdminController::class, 'getAllClientes']);
+});

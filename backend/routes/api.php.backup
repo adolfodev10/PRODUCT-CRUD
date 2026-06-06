@@ -16,8 +16,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('produtos', ProdutoController::class);
 });
 
-// Rotas ADMIN
-Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/clientes/count', [AdminController::class, 'getClientesCount']);
-    Route::get('/clientes', [AdminController::class, 'getAllClientes']);
-});
+// Rotas ADMIN - Separadas
+Route::middleware('auth:sanctum')->get('/admin/clientes/count', [AdminController::class, 'getClientesCount'])->name('admin.clientes.count');
+Route::middleware('auth:sanctum')->get('/admin/clientes', [AdminController::class, 'getAllClientes'])->name('admin.clientes');
