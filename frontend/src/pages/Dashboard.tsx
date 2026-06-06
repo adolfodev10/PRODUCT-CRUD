@@ -18,7 +18,6 @@ import {
   Search,
   Grid3X3,
   List,
-  TrendingUp,
   AlertCircle,
   CheckCircle,
   XCircle
@@ -135,10 +134,6 @@ export default function Dashboard() {
     )
   }
 
-  const StockStatusIcon = ({ estoque }: { estoque: number }) => {
-    const { icon: Icon, color } = getStockStatus(estoque)
-    return <Icon className={`w-4 h-4 ${color.replace('bg-', 'text-').replace('text-', '')}`} />
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
