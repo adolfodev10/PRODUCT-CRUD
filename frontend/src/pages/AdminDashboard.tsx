@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { 
-  Users, 
-  Package, 
-  ShoppingBag, 
-  TrendingUp, 
-  Shield, 
+import {
+  Users,
+  Package,
+  ShoppingBag,
+  TrendingUp,
+  Shield,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(user?.is_admin) {
+    if (user?.is_admin) {
       fetchAdminData()
     } else {
       navigate('/dashboard')
@@ -96,7 +96,6 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Navbar */}
       <nav className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-between items-center h-16 gap-2">
@@ -134,9 +133,7 @@ export default function AdminDashboard() {
       </nav>
 
       <div className="max-w-7xl mx-auto py-4 sm:py-8 px-3 sm:px-6 lg:px-8">
-        {/* Stats Cards - Responsivo */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          {/* Card 1 */}
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 border-l-4 border-blue-500 hover:shadow-lg transition-all">
             <div className="flex items-center justify-between">
               <div>
@@ -153,7 +150,6 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* Card 2 */}
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 border-l-4 border-green-500 hover:shadow-lg transition-all">
             <div className="flex items-center justify-between">
               <div>
@@ -167,7 +163,6 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* Card 3 */}
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 border-l-4 border-purple-500 hover:shadow-lg transition-all">
             <div className="flex items-center justify-between">
               <div>
@@ -185,9 +180,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Clientes List */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          {/* Header da Lista */}
           <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
@@ -199,9 +192,8 @@ export default function AdminDashboard() {
                   {clientes.length} cliente(s) no total
                 </p>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-3">
-                {/* Search */}
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input
@@ -212,27 +204,24 @@ export default function AdminDashboard() {
                     className="pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full sm:w-64 text-sm"
                   />
                 </div>
-                
-                {/* View Mode Toggle */}
+
                 <div className="flex border rounded-lg overflow-hidden">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2 transition-colors ${
-                      viewMode === 'grid' 
-                        ? 'bg-purple-600 text-white' 
-                        : 'bg-white text-gray-500 hover:bg-gray-50'
-                    }`}
+                    className={`p-2 transition-colors ${viewMode === 'grid'
+                      ? 'bg-purple-600 text-white'
+                      : 'bg-white text-gray-500 hover:bg-gray-50'
+                      }`}
                     title="Visualizar em grade"
                   >
                     <Grid3X3 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('table')}
-                    className={`p-2 transition-colors ${
-                      viewMode === 'table' 
-                        ? 'bg-purple-600 text-white' 
-                        : 'bg-white text-gray-500 hover:bg-gray-50'
-                    }`}
+                    className={`p-2 transition-colors ${viewMode === 'table'
+                      ? 'bg-purple-600 text-white'
+                      : 'bg-white text-gray-500 hover:bg-gray-50'
+                      }`}
                     title="Visualizar em tabela"
                   >
                     <List className="w-4 h-4" />
@@ -242,7 +231,6 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* Visualização em Grade (Mobile) */}
           {viewMode === 'grid' && (
             <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {paginatedClientes.map((cliente) => (
@@ -262,11 +250,10 @@ export default function AdminDashboard() {
                         </p>
                       </div>
                     </div>
-                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      cliente.produtos_count > 0 
-                        ? 'bg-green-100 text-green-700' 
-                        : 'bg-gray-200 text-gray-500'
-                    }`}>
+                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${cliente.produtos_count > 0
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-gray-200 text-gray-500'
+                      }`}>
                       {cliente.produtos_count} produto(s)
                     </div>
                   </div>
@@ -285,7 +272,6 @@ export default function AdminDashboard() {
             </div>
           )}
 
-          {/* Visualização em Tabela (Desktop) */}
           {viewMode === 'table' && (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px]">
@@ -347,7 +333,6 @@ export default function AdminDashboard() {
             </div>
           )}
 
-          {/* Paginação */}
           {totalPages > 1 && (
             <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-3">
               <p className="text-xs sm:text-sm text-gray-500 order-2 sm:order-1">
@@ -376,7 +361,6 @@ export default function AdminDashboard() {
           )}
         </div>
 
-        {/* Info Footer */}
         <div className="mt-4 sm:mt-6 text-center">
           <p className="text-xs text-gray-400">
             Última atualização: {stats?.data_consulta}
