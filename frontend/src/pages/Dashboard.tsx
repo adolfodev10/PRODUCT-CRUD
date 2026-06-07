@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { 
-  Package, 
-  Plus, 
-  LogOut, 
-  Edit, 
-  Trash2, 
-  ChevronLeft, 
+import {
+  Package,
+  Plus,
+  LogOut,
+  Edit,
+  Trash2,
+  ChevronLeft,
   ChevronRight,
   DollarSign,
   Box,
@@ -137,19 +137,16 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Toast Notification */}
       {toast && (
         <div className="fixed top-4 right-4 z-50 animate-slide-in-right">
-          <div className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg flex items-center gap-2 ${
-            toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'
-          } text-white text-sm sm:text-base`}>
+          <div className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg flex items-center gap-2 ${toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            } text-white text-sm sm:text-base`}>
             {toast.type === 'success' ? <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" /> : <XCircle className="w-4 h-4 sm:w-5 sm:h-5" />}
             <span>{toast.message}</span>
           </div>
         </div>
       )}
 
-      {/* Navbar */}
       <nav className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-between items-center h-auto sm:h-16 py-2 sm:py-0 gap-2">
@@ -173,8 +170,7 @@ export default function Dashboard() {
                 </div>
                 <span className="text-sm font-medium text-gray-700">{user?.name}</span>
               </div>
-              
-              {/* Admin Button */}
+
               {user?.is_admin && (
                 <button
                   onClick={() => navigate('/admin')}
@@ -184,7 +180,7 @@ export default function Dashboard() {
                   <span className="hidden sm:inline">Painel Admin</span>
                 </button>
               )}
-              
+
               <button
                 onClick={() => navigate('/produtos/novo')}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center gap-1 sm:gap-2 shadow-md"
@@ -204,9 +200,7 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto py-4 sm:py-8 px-3 sm:px-6 lg:px-8">
-        {/* Search and View Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 sm:mb-6">
           <div className="relative w-full sm:w-72">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -218,27 +212,24 @@ export default function Dashboard() {
               className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             />
           </div>
-          
-          {/* View Mode Toggle */}
+
           <div className="flex border rounded-lg overflow-hidden">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 transition-colors ${
-                viewMode === 'grid' 
-                  ? 'bg-blue-600 text-white' 
+              className={`p-2 transition-colors ${viewMode === 'grid'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-white text-gray-500 hover:bg-gray-50'
-              }`}
+                }`}
               title="Visualizar em grade"
             >
               <Grid3X3 className="w-4 h-4" />
             </button>
             <button
               onClick={() => setViewMode('table')}
-              className={`p-2 transition-colors ${
-                viewMode === 'table' 
-                  ? 'bg-blue-600 text-white' 
+              className={`p-2 transition-colors ${viewMode === 'table'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-white text-gray-500 hover:bg-gray-50'
-              }`}
+                }`}
               title="Visualizar em tabela"
             >
               <List className="w-4 h-4" />
@@ -269,7 +260,6 @@ export default function Dashboard() {
           </div>
         ) : (
           <>
-            {/* Products Grid View */}
             {viewMode === 'grid' && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                 {filteredProdutos.map((produto) => {
@@ -279,7 +269,6 @@ export default function Dashboard() {
                       key={produto.id}
                       className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1"
                     >
-                      {/* Product Header */}
                       <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-3 sm:px-4 py-2 sm:py-3 border-b border-gray-100">
                         <div className="flex items-start justify-between">
                           <h3 className="font-semibold text-gray-900 line-clamp-1 text-sm sm:text-base">
@@ -292,12 +281,11 @@ export default function Dashboard() {
                         </div>
                       </div>
 
-                      {/* Product Body */}
                       <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
                         {produto.descricao && (
                           <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{produto.descricao}</p>
                         )}
-                        
+
                         <div className="space-y-1.5 sm:space-y-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
@@ -308,7 +296,7 @@ export default function Dashboard() {
                               {formatCurrency(produto.preco)}
                             </span>
                           </div>
-                          
+
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
                               <Box className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -316,7 +304,7 @@ export default function Dashboard() {
                             </div>
                             <span className="font-medium text-gray-900 text-sm sm:text-base">{produto.estoque} un.</span>
                           </div>
-                          
+
                           {produto.categoria && (
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
@@ -329,7 +317,6 @@ export default function Dashboard() {
                         </div>
                       </div>
 
-                      {/* Product Actions */}
                       <div className="flex border-t border-gray-100">
                         <button
                           onClick={() => navigate(`/produtos/editar/${produto.id}`)}
@@ -370,7 +357,6 @@ export default function Dashboard() {
               </div>
             )}
 
-            {/* Products Table View (Desktop) */}
             {viewMode === 'table' && (
               <div className="bg-white rounded-xl shadow-md overflow-hidden">
                 <div className="overflow-x-auto">
@@ -460,7 +446,6 @@ export default function Dashboard() {
               </div>
             )}
 
-            {/* Pagination */}
             {meta.last_page > 1 && (
               <div className="flex justify-center items-center space-x-2 sm:space-x-3 mt-8 sm:mt-12">
                 <button
@@ -483,16 +468,15 @@ export default function Dashboard() {
                     } else {
                       pageNum = currentPage - 2 + i
                     }
-                    
+
                     return (
                       <button
                         key={pageNum}
                         onClick={() => setCurrentPage(pageNum)}
-                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-all text-sm sm:text-base ${
-                          currentPage === pageNum
+                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-all text-sm sm:text-base ${currentPage === pageNum
                             ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
                             : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
-                        }`}
+                          }`}
                       >
                         {pageNum}
                       </button>
