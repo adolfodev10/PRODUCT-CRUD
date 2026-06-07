@@ -6,7 +6,6 @@ Route::get('/', function () {
     return view('welcome');
 });Route::get('/teste', fn() => 'Funciona');
 
-// Rotas da API (temporário em web.php)
 Route::post('/api/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('/api/register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 
@@ -19,7 +18,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/api/produtos/{id}', [App\Http\Controllers\Api\ProdutoController::class, 'update']);
     Route::delete('/api/produtos/{id}', [App\Http\Controllers\Api\ProdutoController::class, 'destroy']);
     
-    // Rotas ADMIN
     Route::get('/api/admin/clientes/count', [App\Http\Controllers\Api\AdminController::class, 'getClientesCount']);
     Route::get('/api/admin/clientes', [App\Http\Controllers\Api\AdminController::class, 'getAllClientes']);
 });
