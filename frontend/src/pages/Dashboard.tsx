@@ -9,7 +9,6 @@ import {
   Trash2,
   ChevronLeft,
   ChevronRight,
-  DollarSign,
   Box,
   Tag,
   User,
@@ -20,7 +19,8 @@ import {
   List,
   AlertCircle,
   CheckCircle,
-  XCircle
+  XCircle,
+  Coins
 } from 'lucide-react'
 import api from '../services/api'
 
@@ -105,13 +105,14 @@ export default function Dashboard() {
     navigate('/login')
   }
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(value)
-  }
-
+const formatCurrency = (value: number) => {
+  return new Intl.NumberFormat('pt-AO', {
+    style: 'currency',
+    currency: 'AOA',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(value)
+}
   const getStockStatus = (estoque: number) => {
     if (estoque === 0) return { label: 'Esgotado', color: 'bg-red-100 text-red-800', icon: XCircle }
     if (estoque < 5) return { label: 'Estoque Baixo', color: 'bg-yellow-100 text-yellow-800', icon: AlertCircle }
@@ -289,7 +290,7 @@ export default function Dashboard() {
                         <div className="space-y-1.5 sm:space-y-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                              <DollarSign className="w-3 h-3 sm:w-4 sm:h-4" />
+                              <Coins className="w-3 h-3 sm:w-4 sm:h-4" />
                               <span>Preço</span>
                             </div>
                             <span className="text-base sm:text-lg font-bold text-blue-600">

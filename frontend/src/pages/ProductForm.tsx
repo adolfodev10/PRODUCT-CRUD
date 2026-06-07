@@ -1,8 +1,9 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
-  Save, X, Package, DollarSign, Layers, Archive, FileText, AlertCircle,
-  Smartphone, Shirt, Book, Apple, Sparkles, Bike, Box, CheckCircle
+  Save, X, Package, Layers, Archive, FileText, AlertCircle,
+  Smartphone, Shirt, Book, Apple, Sparkles, Bike, Box, CheckCircle,
+  Coins
 } from 'lucide-react'
 import api from '../services/api'
 
@@ -168,13 +169,14 @@ export default function ProductForm() {
     setErrors({})
   }
 
-  const formatCurrency = (value: string) => {
-    const num = parseFloat(value)
-    if (isNaN(num)) return 'R$ 0,00'
-    return new Intl.NumberFormat('pt-BR', {
+  const formatCurrency = (value: number | string) => {
+    const numericValue = typeof value === 'string' ? parseFloat(value) : value
+    return new Intl.NumberFormat('pt-AO', {
       style: 'currency',
-      currency: 'BRL'
-    }).format(num)
+      currency: 'AOA',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(numericValue)
   }
 
   const getSelectedCategoryIcon = () => {
@@ -269,12 +271,12 @@ export default function ProductForm() {
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                   <span className="flex items-center gap-2">
-                    <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
+                    <Coins className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" />
                     Preço
                   </span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">R$</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">AOA</span>
                   <input
                     type="number"
                     step="0.01"
