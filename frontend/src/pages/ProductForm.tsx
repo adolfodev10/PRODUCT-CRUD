@@ -1,8 +1,8 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { 
-  Save, X, Package, DollarSign, Layers, Archive, FileText, AlertCircle, 
-  Smartphone, Shirt, Book, Apple, Sparkles, Bike, Box, CheckCircle 
+import {
+  Save, X, Package, DollarSign, Layers, Archive, FileText, AlertCircle,
+  Smartphone, Shirt, Book, Apple, Sparkles, Bike, Box, CheckCircle
 } from 'lucide-react'
 import api from '../services/api'
 
@@ -84,7 +84,7 @@ export default function ProductForm() {
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
-    
+
     if (errors[name as keyof ValidationErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }))
     }
@@ -92,7 +92,7 @@ export default function ProductForm() {
 
   const validateForm = (): boolean => {
     const newErrors: ValidationErrors = {}
-    
+
     if (!formData.nome.trim()) {
       newErrors.nome = ['O nome do produto é obrigatório']
     } else if (formData.nome.length < 3) {
@@ -119,7 +119,7 @@ export default function ProductForm() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) {
       showToast('Por favor, corrija os erros no formulário', 'error')
       return
@@ -224,9 +224,7 @@ export default function ProductForm() {
             </div>
           </div>
 
-          {/* Form Body */}
           <form onSubmit={handleSubmit} className="p-5 sm:p-8 space-y-5 sm:space-y-6">
-            {/* Nome do Produto */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                 <span className="flex items-center gap-2">
@@ -240,11 +238,10 @@ export default function ProductForm() {
                 value={formData.nome}
                 onChange={handleChange}
                 placeholder="Ex: Smartphone XYZ, Notebook Gamer, etc."
-                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${
-                  errors.nome 
-                    ? 'border-red-500 focus:ring-red-500' 
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${errors.nome
+                    ? 'border-red-500 focus:ring-red-500'
                     : 'border-gray-200 focus:border-blue-500'
-                }`}
+                  }`}
               />
               {errors.nome && (
                 <div className="mt-1.5 sm:mt-2 flex items-center gap-1 text-red-600 text-xs sm:text-sm">
@@ -290,11 +287,10 @@ export default function ProductForm() {
                     value={formData.preco}
                     onChange={handleChange}
                     placeholder="0,00"
-                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${
-                      errors.preco 
-                        ? 'border-red-500 focus:ring-red-500' 
+                    className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${errors.preco
+                        ? 'border-red-500 focus:ring-red-500'
                         : 'border-gray-200 focus:border-blue-500'
-                    }`}
+                      }`}
                   />
                 </div>
                 {formData.preco && (
@@ -323,11 +319,10 @@ export default function ProductForm() {
                   value={formData.estoque}
                   onChange={handleChange}
                   placeholder="Quantidade em estoque"
-                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${
-                    errors.estoque 
-                      ? 'border-red-500 focus:ring-red-500' 
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${errors.estoque
+                      ? 'border-red-500 focus:ring-red-500'
                       : 'border-gray-200 focus:border-blue-500'
-                  }`}
+                    }`}
                 />
                 {errors.estoque && (
                   <div className="mt-1.5 sm:mt-2 flex items-center gap-1 text-red-600 text-xs sm:text-sm">
