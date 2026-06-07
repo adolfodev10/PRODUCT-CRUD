@@ -5,18 +5,15 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProdutoController;
 use App\Http\Controllers\Api\AdminController;
 
-// Rotas públicas
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-// Rotas protegidas
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('produtos', ProdutoController::class);
 });
 
-// Rotas ADMIN
 Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
     Route::get('/clientes/count', [AdminController::class, 'getClientesCount']);
     Route::get('/clientes', [AdminController::class, 'getAllClientes']);
