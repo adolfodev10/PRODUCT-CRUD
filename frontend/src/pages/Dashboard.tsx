@@ -105,14 +105,14 @@ export default function Dashboard() {
     navigate('/login')
   }
 
-const formatCurrency = (value: number) => {
-  return new Intl.NumberFormat('pt-AO', {
-    style: 'currency',
-    currency: 'AOA',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(value)
-}
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('pt-AO', {
+      style: 'currency',
+      currency: 'AOA',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(value)
+  }
   const getStockStatus = (estoque: number) => {
     if (estoque === 0) return { label: 'Esgotado', color: 'bg-red-100 text-red-800', icon: XCircle }
     if (estoque < 5) return { label: 'Estoque Baixo', color: 'bg-yellow-100 text-yellow-800', icon: AlertCircle }
