@@ -13,7 +13,6 @@ export default function Login() {
   const { login } = useAuth()
   const navigate = useNavigate()
 
-  // Auto-fill demo credentials for testing
   const fillDemoCredentials = () => {
     setEmail('admin@exemplo.com')
     setPassword('123456')
@@ -21,7 +20,7 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!email.trim()) {
       setError('Por favor, informe seu email')
       return
@@ -30,22 +29,22 @@ export default function Login() {
       setError('Por favor, informe sua senha')
       return
     }
-    
+
     setError('')
     setLoading(true)
-    
+
     try {
       await login(email, password)
-      
+
       if (rememberMe) {
         localStorage.setItem('remember_me', 'true')
       }
-      
+
       navigate('/dashboard')
     } catch (err: any) {
-      const errorMessage = err.response?.data?.message || 
-                          err.response?.data?.error ||
-                          'Email ou senha inválidos'
+      const errorMessage = err.response?.data?.message ||
+        err.response?.data?.error ||
+        'Email ou senha inválidos'
       setError(errorMessage)
     } finally {
       setLoading(false)
@@ -55,7 +54,6 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center px-3 sm:px-4 py-8 sm:py-12">
       <div className="max-w-md w-full mx-auto">
-        {/* Logo/Brand - Responsivo */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-lg mb-3 sm:mb-4">
             <ShoppingBag className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
@@ -68,7 +66,6 @@ export default function Login() {
           </p>
         </div>
 
-        {/* Login Card - Responsivo */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden mx-0">
           <div className="px-5 sm:px-8 pt-6 sm:pt-8 pb-4 sm:pb-6">
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">
@@ -80,7 +77,6 @@ export default function Login() {
           </div>
 
           <form onSubmit={handleSubmit} className="px-5 sm:px-8 pb-6 sm:pb-8 space-y-5 sm:space-y-6">
-            {/* Error Message */}
             {error && (
               <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-3 sm:p-4 flex items-start gap-2 sm:gap-3">
                 <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 flex-shrink-0 mt-0.5" />
@@ -90,7 +86,6 @@ export default function Login() {
               </div>
             )}
 
-            {/* Email Field */}
             <div className="space-y-1.5 sm:space-y-2">
               <label className="block text-xs sm:text-sm font-medium text-gray-700">
                 Email
@@ -110,7 +105,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Password Field */}
             <div className="space-y-1.5 sm:space-y-2">
               <label className="block text-xs sm:text-sm font-medium text-gray-700">
                 Senha
@@ -141,7 +135,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Remember Me & Demo Credentials */}
             <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2 xs:gap-0">
               <label className="flex items-center cursor-pointer">
                 <input
@@ -163,7 +156,6 @@ export default function Login() {
               </button>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
@@ -182,7 +174,6 @@ export default function Login() {
               )}
             </button>
 
-            {/* Register Link */}
             <div className="text-center pt-3 sm:pt-4 border-t border-gray-200">
               <p className="text-xs sm:text-sm text-gray-600">
                 Não tem uma conta?{' '}
@@ -197,7 +188,6 @@ export default function Login() {
           </form>
         </div>
 
-        {/* Footer */}
         <div className="text-center mt-4 sm:mt-6">
           <p className="text-xs text-gray-500 px-2">
             Ao continuar, você concorda com nossos{' '}

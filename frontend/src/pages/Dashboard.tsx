@@ -217,8 +217,8 @@ export default function Dashboard() {
             <button
               onClick={() => setViewMode('grid')}
               className={`p-2 transition-colors ${viewMode === 'grid'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-500 hover:bg-gray-50'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-500 hover:bg-gray-50'
                 }`}
               title="Visualizar em grade"
             >
@@ -227,8 +227,8 @@ export default function Dashboard() {
             <button
               onClick={() => setViewMode('table')}
               className={`p-2 transition-colors ${viewMode === 'table'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-500 hover:bg-gray-50'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-500 hover:bg-gray-50'
                 }`}
               title="Visualizar em tabela"
             >
@@ -474,8 +474,8 @@ export default function Dashboard() {
                         key={pageNum}
                         onClick={() => setCurrentPage(pageNum)}
                         className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg font-medium transition-all text-sm sm:text-base ${currentPage === pageNum
-                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                            : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
+                          : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
                           }`}
                       >
                         {pageNum}
