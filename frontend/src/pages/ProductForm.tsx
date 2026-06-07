@@ -189,7 +189,6 @@ export default function ProductForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-6 sm:py-12 px-3 sm:px-4 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        {/* Success Toast */}
         {successMessage && (
           <div className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 animate-slide-in-right">
             <div className="bg-green-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg flex items-center gap-2 text-sm sm:text-base">
@@ -199,9 +198,7 @@ export default function ProductForm() {
           </div>
         )}
 
-        {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-5 sm:px-8 py-4 sm:py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 sm:space-x-3">
@@ -239,8 +236,8 @@ export default function ProductForm() {
                 onChange={handleChange}
                 placeholder="Ex: Smartphone XYZ, Notebook Gamer, etc."
                 className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${errors.nome
-                    ? 'border-red-500 focus:ring-red-500'
-                    : 'border-gray-200 focus:border-blue-500'
+                  ? 'border-red-500 focus:ring-red-500'
+                  : 'border-gray-200 focus:border-blue-500'
                   }`}
               />
               {errors.nome && (
@@ -251,7 +248,6 @@ export default function ProductForm() {
               )}
             </div>
 
-            {/* Descrição */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                 <span className="flex items-center gap-2">
@@ -269,7 +265,6 @@ export default function ProductForm() {
               />
             </div>
 
-            {/* Preço e Estoque */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
@@ -288,8 +283,8 @@ export default function ProductForm() {
                     onChange={handleChange}
                     placeholder="0,00"
                     className={`w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${errors.preco
-                        ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-200 focus:border-blue-500'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-gray-200 focus:border-blue-500'
                       }`}
                   />
                 </div>
@@ -320,8 +315,8 @@ export default function ProductForm() {
                   onChange={handleChange}
                   placeholder="Quantidade em estoque"
                   className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base ${errors.estoque
-                      ? 'border-red-500 focus:ring-red-500'
-                      : 'border-gray-200 focus:border-blue-500'
+                    ? 'border-red-500 focus:ring-red-500'
+                    : 'border-gray-200 focus:border-blue-500'
                     }`}
                 />
                 {errors.estoque && (
@@ -333,7 +328,6 @@ export default function ProductForm() {
               </div>
             </div>
 
-            {/* Categoria - Sem emojis, apenas ícones */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
                 <span className="flex items-center gap-2">
@@ -355,7 +349,6 @@ export default function ProductForm() {
                 ))}
               </select>
 
-              {/* Preview da categoria selecionada com ícone */}
               {formData.categoria && (
                 <div className="mt-2 flex items-center gap-2 text-sm text-gray-600">
                   <span className="text-xs">Categoria selecionada:</span>
@@ -367,7 +360,6 @@ export default function ProductForm() {
               )}
             </div>
 
-            {/* Form Actions */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200">
               <button
                 type="submit"
